@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Answer Question</title>
+</head>
+<body>
+    <h1>Answer Question</h1>
+    <h2>{{ question.question_text }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Answer</button>
+    </form>
+    <a href="{% url 'home' %}">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home</h1>
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+        <a href="{% url 'post_question' %}">Post a Question</a>
+        <ul>
+            {% for question in questions %}
+                <li>
+                    <a href="{% url 'answer_question' question.id %}">{{ question.question_text }}</a>
+                    {% if user in question.author.liked_answers.all %}
+                        <span>Liked</span>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'user_logout' %}">Logout</a>
+    {% else %}
+        <p>Please login to view questions</p>
+        <a href="{% url 'user_login' %}">Login</a>
+    {% endif %}
+</body>
+</html>
